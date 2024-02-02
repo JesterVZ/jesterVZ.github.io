@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="/rbi-pwa/">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="invest">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Prevent flickering during loading. -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png"/>
+
+    <title>invest</title>
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "3384879971";
+    </script>
+
+    <!-- This script adds the flutter initialization JS code -->
+    <script src="flutter.js" defer></script>
+
+    <!-- JS скрипты-->
+    <script defer src="scripts/indexed_db.js"></script>
+    <script defer src="scripts/web_authn.js"></script>
+    <script defer src="scripts/add_to_home_screen.js"></script>
+</head>
+<body style="">
+
+<!--нативный сплеш скрин при старте, чтобы юзер не думал, что что-то  лагает и он смотрит в белый экран-->
+<div style="">
+    <img style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);"
+         width="50"
+         src="icons/splash_screen_loader.gif">
+</div>
+
+<!-- loads main.dart.js -->
+<script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+</script>
+
+<!-- for syncfusion_flutter_pdfviewer -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+<!-- for syncfusion_flutter_pdfviewer -->
+<script type="text/javascript">
+   pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+</script>
+
+<!-- firebase messaging -->
+<script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        console.log('push config location', window.location.origin + window.location.pathname + "firebase-messaging-sw.js");
+        navigator.serviceWorker.register(window.location.origin + window.location.pathname + "firebase-messaging-sw.js");
+      });
+    }
+</script>
+</body>
+</html>
